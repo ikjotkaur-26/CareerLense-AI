@@ -1,2 +1,3 @@
 Flask
 pyPDF2
+gunicorn
