@@ -1,0 +1,209 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0f172a;
+    color: white;
+}
+
+/* HERO SECTION */
+.hero {
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.hero h1 {
+    font-size: 60px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    color: #cbd5e1;
+    margin-bottom: 30px;
+}
+
+.upload-box input {
+    padding: 10px;
+    background: #1e293b;
+    color: white;
+    border-radius: 8px;
+    border: none;
+}
+
+.upload-box button {
+    background: #3b82f6;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.upload-box button:hover {
+    opacity: 0.9;
+}
+
+/* DASHBOARD LAYOUT */
+.dashboard-container {
+    display: flex;
+    gap: 20px;
+    padding: 30px;
+}
+
+/* LEFT + RIGHT PANELS */
+.dashboard-container {
+    display: flex;
+    gap: 20px;
+    padding: 30px;
+    align-items: flex-start;
+}
+
+.left-panel {
+    flex: 1;
+}
+
+.right-panel {
+    flex: 1;
+}
+
+/* CARDS */
+.card {
+    background: #1e293b;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* SCORE STYLE */
+.score h1 {
+    color: #3b82f6;
+    font-size: 40px;
+}
+
+/* TEXT */
+.card h2, .card h3 {
+    margin-top: 0;
+}
+
+/* LISTS */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    padding: 10px;
+    margin: 10px 0;
+    background: #0f172a;
+    border-radius: 8px;
+}
+
+/* CANVAS */
+canvas {
+    background: #0f172a;
+    border-radius: 10px;
+    padding: 10px;
+}
+.chart-box {
+    width: 220px;
+    height: 220px;
+    margin: auto;
+}
+.chart-wrapper {
+    width: 180px;
+    height: 180px;
+    margin: auto;
+    position: relative;
+}
+
+#skillChart {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+
+.ats-meter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+/* Circular ring */
+.ats-meter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* inner cut */
+.circle::before {
+    content: "";
+    position: absolute;
+    width: 115px;
+    height: 115px;
+    background: #0f172a;
+    border-radius: 50%;
+}
+
+/* text */
+.circle span {
+    position: relative;
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+}
+
+/* inner cut */
+.circle::before {
+    content: "";
+    position: absolute;
+    width: 115px;
+    height: 115px;
+    background: #0f172a;
+    border-radius: 50%;
+}
+
+/* text */
+.circle span {
+    position: relative;
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+}
+
+/* Inner circle */
+.circle::before {
+    content: "";
+    position: absolute;
+    width: 110px;
+    height: 110px;
+    background: #0f172a;
+    border-radius: 50%;
+}
+
+/* Text */
+.circle span {
+    position: relative;
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+}

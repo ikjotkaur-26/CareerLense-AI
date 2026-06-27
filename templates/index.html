@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CareerLens AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="hero">
+    <h1>🚀 CareerLens AI</h1>
+    <p>AI-Powered Resume Analysis, Skill Gap Detection & Job Matching</p>
+
+    <form method="POST" enctype="multipart/form-data" class="upload-box">
+        <input type="file" name="resume" required>
+        <button type="submit">Upload & Analyze</button>
+    </form>
+</div>
+
+{% if resume_text %}
+
+<div class="dashboard-container">
+
+    <div class="left-panel">
+
+        <div class="card">
+            <h2>Resume Summary</h2>
+            <p>{{ resume_summary }}</p>
+        </div>
+
+        <div class="card">
+            <h2>Skills Found</h2>
+            <ul>
+                {% for skill in found_skills %}
+                <li>{{ skill }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Missing Skills</h2>
+            <ul>
+                {% for skill in missing_skills %}
+                <li>{{ skill }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Strengths</h2>
+            <ul>
+                {% for strength in strengths %}
+                <li>{{ strength }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Areas To Improve</h2>
+            <ul>
+                {% for weakness in weaknesses %}
+                <li>{{ weakness }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Career Gap Analysis</h2>
+            <p>{{ career_gap }}</p>
+        </div>
+
+    </div>
+
+    <div class="right-panel">
+
+        <div class="card score">
+            <h2>ATS Score</h2>
+            <div class="ats-meter">
+                <div class="circle"
+                     style="background: conic-gradient(#3b82f6 {{ ats_score | default(0) }}%, #1e293b 0%);">
+                    <span>{{ ats_score | default(0) }}%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card score">
+            <h2>Match Score</h2>
+            <h1>{{ match_score | default(0) }}%</h1>
+        </div>
+
+        <div class="card">
+            <h2>Skill Chart</h2>
+            <div class="chart-wrapper">
+                <canvas id="skillChart"></canvas>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Recruiter Review</h2>
+            <p>{{ recruiter_review }}</p>
+        </div>
+
+        <div class="card">
+            <h2>Recommended Jobs</h2>
+            <ul>
+                {% for job in job_recommendations %}
+                <li>{{ job }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="card jd-card">
+            <h2>🎯 Job Description Match</h2>
+
+            <form method="POST" enctype="multipart/form-data">
+                <p style="font-size: 12px; color: #94a3b8;">Re-upload resume if you want to test a new file with this JD:</p>
+                <input type="file" name="resume">
+
+                <textarea
+                    name="job_description"
+                    placeholder="Paste Job Description Here"
+                    rows="8"
+                    style="width:100%; margin-top:10px;" required></textarea>
+
+                <button type="submit" style="margin-top:10px;">
+                    Analyze JD Match
+                </button>
+            </form>
+
+            <hr>
+
+            <h3>JD Match Score</h3>
+            <h1>{{ jd_match_score | default(0) }}%</h1>
+
+            <h3>Missing JD Skills</h3>
+            <ul>
+                {% for skill in missing_jd_skills %}
+                <li>{{ skill }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    // Safely parse lengths using Jinja's default filter
+    const found = Number("{{ found_skills | length if found_skills is defined else 0 }}");
+    const missing = Number("{{ missing_skills | length if missing_skills is defined else 0 }}");
+
+    const canvas = document.getElementById("skillChart");
+    if (!canvas) return;
+
+    new Chart(canvas, {
+        type: 'pie',
+        data: {
+            labels: ['Found', 'Missing'],
+            datasets: [{
+                data: [found, missing],
+                backgroundColor: ['#3b82f6', '#ef4444'],
+                borderWidth: 2,
+                borderColor: '#0f172a'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        color: 'white',
+                        font: {
+                            size: 12
+                        }
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
+
+{% endif %}
+
+</body>
+</html>
